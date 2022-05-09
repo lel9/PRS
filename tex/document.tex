@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{report} %размер бумаги устанавливаем А4, шрифт 12пунктов
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[cp1251]{inputenc}%включаем свою кодировку: koi8-r или utf8 в UNIX, cp1251 в Windows
+\usepackage[english,russian]{babel}%используем русский и английский языки с переносами
+\usepackage{hyperref}
+%\usepackage{amssymb,amsfonts,amsmath,mathtext,cite,enumerate,float} %подключаем нужные пакеты расширений
+%\usepackage[dvips]{graphicx} %хотим вставлять в диплом рисунки?
+%\graphicspath{{images/}}%путь к рисункам
+\setcounter{tocdepth}{4}
+
+\usepackage{geometry} % Меняем поля страницы
+\geometry{left=2cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=1cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+\makeatletter
+%\def\@makechapterhead#1{%
+%	{\normalfont
+		
+%		\bfseries\Huge{#1}\par\nobreak\vskip 20\p@}}
+%\makeatother
+%\newcommand{hell}[1]{\value{chapter}\chapter{ #1 }}
+\begin{document}
+	\input{Metoda-Title}% это титульный лист
+	\tableofcontents % это оглавление, которое генерируется автоматически
+	
+	\chapter* {Введение}
+	\chapter {Лабораторная работа 1.1. Сборка и запуск учебного веб-сайта}
+	\textbf{Цель}: подготовка рабочего места для лабораторных работ 1.2-1.14.
+	
+	
+	\section{Задание}
+	Скачать исходный код учебного веб-сайта из репозитория курса \url{}, изучить его, выполнить настройку окружения в соответствии с инструкцией, запустить учебный веб-сайт и проверить работоспособность.
+	\section{Учебный веб-сайт}
+	\subsection{Набор данных}
+	В лабораторных работах будут использованы общедоступные данные веб-сайта MovieLens (\url{https://movielens.org}), собранные и опубликованные компанией GroupLens Research: \url{https://grouplens.org/datasets/movielens}. Компания предоставила несколько наборов данных, для учебного веб-сайта выбран набор ml-latest-small.zip (\url{https://files.grouplens.org/datasets/movielens/ml-latest-small.zip} от 9/2018, содержащий 100 000 оценок и 3 600 тегов, примененных к 9 000 фильмам 600 пользователями.
+	
+	Набор состоит из следующих файлов:
+	\begin{itemize}
+		\item movies.csv -- фильмы, для каждого указаны идентификатор (movieId), название и год выхода (title), список жанров (genres);
+		\item ratings.csv -- оценки, для каждой указаны идентификатор пользователя (userId), идентификатор фильма (movieId), значение от 0.5 до 5 (rating), отметка времени добавления (timestamp);
+		\item tags.csv -- теги, для каждого указан идентификатор пользователя (userId), идентификатор фильма (movieId), значение (tag), отметка времени добавления (timestamp).
+    \end{itemize}
+	\subsection{Серверная часть}
+	Серверная часть написана на языке Python с использованием фреймворка Flask. Она состоит из следующих файлов:
+	\begin{itemize}
+		\item model.py -- логика запросов к базе данных (чтение и запись);
+		\item model\_helpers.py -- вспомогательные функции для файла model.py, такие как установка и закрытие соединения с базой данных, преобразование объектов sqllite3.Row в словари;
+		\item api.py -- API, каждая функция API вызывает соответствующую функцию из файла model.py для чтения или записи данных в базу данных.
+	\end{itemize}
+    В качестве СУБД используется SQLite, реализованная встроенным в Python модулем.
+	\subsection{Клиентская часть}
+	Про реакт (?)
+	\section{Настройка окружения}
+	\begin{enumerate}
+		\item Установить Python 3 с официального сайта: \url{https://www.python.org/downloads/}
+		\item Установить IDE (опционально), например, PyCharm: \url{https://www.jetbrains.com/pycharm/download/} 
+		\item Установить ???
+		\item Установить HTTP-клиент для тестирования API, например, Postman: \url{https://www.postman.com/downloads/}
+		\item Перейти в директорию с исходным кодом.
+		\item Установить необходимые пакеты Python (Flask), из IDE или выполнив команду
+		\begin{verbatim}
+			pip install -r requirements.txt
+		\end{verbatim}
+	    \item Запустить скрипт инициализации базы данных db\_init\_script.py, из IDE или выполнив команду
+	    \begin{verbatim}
+	    	python3 db_init_script.py
+	    \end{verbatim}
+	\end{enumerate}
+    \section{Запуск и проверка работоспособности}
+    \begin{enumerate}
+    	\item Запустить серверную часть app.py, из IDE или выполнив команду 
+    	\begin{verbatim}
+    		python3 app.py
+    	\end{verbatim} 
+        \item Запустить клиентскую часть ???
+        \item Открыть стартовую страницу в браузере, если всё настроено верно, её вид должен соответствовать рис. 1.1.
+        \item В поле "идентификатор пользователя" ввести 1, в открывшейся странице должен отобразиться список фильмов (рис. 1.2)
+        
+    \end{enumerate}
+	
+\end{document}
+
+     
