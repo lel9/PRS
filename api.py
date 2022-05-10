@@ -9,6 +9,12 @@ def get_all_movies():
     movies = model.get_all_movies()
     return jsonify(movies)
 
+# список новых фильмов (лаб. 1.2)
+@app.route('/api/movies/new', methods = ['GET'])
+def get_new_movies():
+    movies = model.get_new_movies()
+    return jsonify(movies)
+
 # фильм по id
 @app.route('/api/movies/<id>', methods = ['GET'])
 def get_movie(id):
