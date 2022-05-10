@@ -18,6 +18,8 @@ def row_to_movie(row):
     movie = {}
     movie["movieId"] = row["movieId"]
     movie["title"] = row["title"]
+    movie["year"] = row["year"]
+    movie["rating"] = row["rating"]
     # если жанров нет (пустая строка), содаём пустой список
     movie["genres"] = row["genres"].split('|') if row["genres"] else []
     return movie

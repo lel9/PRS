@@ -7,7 +7,23 @@ def get_all_movies():
     try:
         conn = get_db_connection()
         # запрашиваем из базы данных все фильмы
-        rows = conn.execute('SELECT * FROM movies').fetchall()
+        rows = conn.execute('SELECT * FROM movies ORDER BY rating DESC').fetchall()
+        # преобразуем объект Row в словарь
+        movies = [row_to_movie(row) for row in rows]
+    except:
+        movies = []
+    finally:
+        # закрываем соединение
+        close_connection(conn)
+    return movies
+
+def get_new_movies():
+    conn = None
+    try:
+        conn = get_db_connection()
+        # запрашиваем из базы данных новые фильмы
+        rows = conn.execute('SELECT * FROM movies '
+                            'ORDER BY year DESC LIMIT 10').fetchall()
         # преобразуем объект Row в словарь
         movies = [row_to_movie(row) for row in rows]
     except:
